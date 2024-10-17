@@ -1,1 +1,17 @@
-/* No CSS *//*# sourceMappingURL=styles.css.map */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  color: #2c3e50;
+  margin: 0;
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+    padding: 0.5rem;
+  }
+}
+/*# sourceMappingURL=styles.css.map */

@@ -5,7 +5,7 @@
   "main": "resources/source/java/main.js",
   "scripts": {
     "start": "electron .",
-    "dev": "nodemon --watch resources/source --exec electron ."
+    "dev": "nodemon"
   },
   "author": "Dustin Angeletti",
   "license": "MIT",
