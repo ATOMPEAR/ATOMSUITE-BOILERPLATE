@@ -84,6 +84,15 @@ body
 #content
   flex-grow: 1
   padding: 1rem
+  overflow: hidden
+
+.main-content
+  display: none
+  height: 100%
+  width: 100%
+
+  &.active
+    display: block
 
 // Responsive design
 @media (max-width: 600px)

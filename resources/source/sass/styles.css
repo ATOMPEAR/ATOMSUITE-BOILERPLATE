@@ -100,6 +100,17 @@ body {
       -ms-flex-positive: 1;
           flex-grow: 1;
   padding: 1rem;
+  overflow: hidden;
+}
+
+.main-content {
+  display: none;
+  height: 100%;
+  width: 100%;
+}
+
+.main-content.active {
+  display: block;
 }
 
 @media (max-width: 600px) {
