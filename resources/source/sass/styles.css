@@ -5,6 +5,11 @@
   font-style: normal;
 }
 
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.6;
@@ -12,8 +17,6 @@ body {
   background-color: #ffffff;
   margin: 0;
   padding: 0;
-  max-width: 100%;
-  height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -89,16 +92,50 @@ body {
   background-color: #ffffff;
   -webkit-transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
+  position: relative;
+}
+
+.control-button[title]::before {
+  content: attr(title);
+  display: none;
 }
 
 .control-button:hover {
   background-color: #01A2FF;
 }
 
+.control-button::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  background-color: #222222;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: visibility 0.3s ease;
+  transition: visibility 0.3s ease;
+  pointer-events: none;
+  z-index: 1000;
+  margin-right: 8px;
+  font-family: "Terminus Nerd Font", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.control-button:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
 #content {
   -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+      -ms-flex: 1;
+          flex: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -106,16 +143,18 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  overflow: hidden;
 }
 
 .main-content {
   display: none;
   -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+      -ms-flex: 1;
+          flex: 1;
   width: 100%;
   margin: 0;
   padding: 0;
+  overflow: auto;
 }
 
 .main-content.active {
@@ -126,12 +165,6 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
 #main-content-1 {
