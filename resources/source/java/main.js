@@ -1,8 +1,11 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, Tray, Menu } = require('electron')
 const path = require('path')
 
+let tray = null
+let mainWindow = null
+
 function createWindow () {
-  const win = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     frame: false,
@@ -14,11 +17,44 @@ function createWindow () {
     icon: path.join(__dirname, '..', '..', 'assets', 'icons', 'favicons', 'favicon1.ico')
   })
 
-  win.loadFile(path.join(__dirname, '..', '..', 'index.html'))
+  mainWindow.loadFile(path.join(__dirname, '..', '..', 'index.html'))
+
+  mainWindow.on('close', (event) => {
+    if (!app.isQuitting) {
+      event.preventDefault()
+      mainWindow.hide()
+    }
+    return false
+  })
+}
+
+function createTray() {
+  tray = new Tray(path.join(__dirname, '..', '..', 'assets', 'icons', 'favicons', 'favicon1.ico'))
+  const contextMenu = Menu.buildFromTemplate([
+    { label: 'SHOW', click: () => mainWindow.show() },
+    { label: 'MINIMIZE', click: () => mainWindow.hide() },
+    { type: 'separator' },
+    { label: 'QUIT', click: () => {
+      app.isQuitting = true
+      app.quit()
+    }}
+  ])
+  tray.setToolTip('AtomSuite Boilerplate')
+  tray.setContextMenu(contextMenu)
+
+  // Add left-click event to show/minimize the app
+  tray.on('click', () => {
+    if (mainWindow.isVisible()) {
+      mainWindow.hide()
+    } else {
+      mainWindow.show()
+    }
+  })
 }
 
 app.whenReady().then(() => {
   createWindow()
+  createTray()
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -38,22 +74,20 @@ ipcMain.handle('ping', () => 'pong')
 
 // Add handlers for window controls
 ipcMain.handle('minimize-window', () => {
-  const win = BrowserWindow.getFocusedWindow()
-  if (win) win.minimize()
+  if (mainWindow) mainWindow.hide()
 })
 
 ipcMain.handle('maximize-window', () => {
-  const win = BrowserWindow.getFocusedWindow()
-  if (win) {
-    if (win.isMaximized()) {
-      win.unmaximize()
+  if (mainWindow) {
+    if (mainWindow.isMaximized()) {
+      mainWindow.unmaximize()
     } else {
-      win.maximize()
+      mainWindow.maximize()
     }
   }
 })
 
 ipcMain.handle('close-window', () => {
-  const win = BrowserWindow.getFocusedWindow()
-  if (win) win.close()
+  app.isQuitting = true
+  app.quit()
 })
