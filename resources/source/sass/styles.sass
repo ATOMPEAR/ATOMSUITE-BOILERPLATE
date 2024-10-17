@@ -1,12 +1,14 @@
 // Theme variables
-$background-color: #FFFFFF
+$background-color: #ffffff
 $text-color: #222222
 $titlebar-background: #222222
-$titlebar-text-color: #FFFFFF
-$control-button-color: #FFFFFF
+$titlebar-text-color: #ffffff
+$control-button-color: #ffffff
 $control-button-hover-color: #01A2FF
-$titlebar-icon-color: #FFFFFF
+$titlebar-icon-color: #ffffff
 $titlebar-icon-hover-color: #01A2FF
+$main-content-1-background: #ffffff  // Red background for main-content-1
+$main-content-2-background: #ffffff  // Green background for main-content-2
 
 // Other variables
 $font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
@@ -83,24 +85,32 @@ body
 // Content styles
 #content
   flex-grow: 1
-  padding: 1rem
-  overflow: hidden
+  display: flex
+  flex-direction: column
 
 .main-content
   display: none
-  height: 100%
+  flex-grow: 1
   width: 100%
+  margin: 0
+  padding: 0
 
   &.active
-    display: block
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+#main-content-1
+  background-color: $main-content-1-background
+
+#main-content-2
+  background-color: $main-content-2-background
 
 // Responsive design
 @media (max-width: 600px)
   body
     font-size: 14px
-
-  #content
-    padding: 0.5rem
 
 // Font Awesome
 @font-face
