@@ -1,10 +1,13 @@
-const { app, BrowserWindow, ipcMain, Tray, Menu } = require('electron')
+const { app, BrowserWindow, ipcMain, Tray, Menu, nativeImage } = require('electron')
 const path = require('path')
 
 let tray = null
 let mainWindow = null
 
 function createWindow () {
+  const iconPath = path.join(__dirname, '..', '..', 'assets', 'icons', 'favicons', 'favicon2.png')
+  const icon = nativeImage.createFromPath(iconPath)
+
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -14,10 +17,15 @@ function createWindow () {
       contextIsolation: true,
       nodeIntegration: false
     },
-    icon: path.join(__dirname, '..', '..', 'assets', 'icons', 'favicons', 'favicon1.ico')
+    icon: icon
   })
 
   mainWindow.loadFile(path.join(__dirname, '..', '..', 'index.html'))
+
+  // Send the icon to the renderer process
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.webContents.send('set-titlebar-icon', icon.toDataURL())
+  })
 
   mainWindow.on('close', (event) => {
     if (!app.isQuitting) {
@@ -29,7 +37,7 @@ function createWindow () {
 }
 
 function createTray() {
-  tray = new Tray(path.join(__dirname, '..', '..', 'assets', 'icons', 'favicons', 'favicon1.ico'))
+  tray = new Tray(path.join(__dirname, '..', '..', 'assets', 'icons', 'favicons', 'favicon2.ico'))
   const contextMenu = Menu.buildFromTemplate([
     { label: 'SHOW', click: () => mainWindow.show() },
     { label: 'MINIMIZE', click: () => mainWindow.hide() },
