@@ -1,13 +1,10 @@
-const { app, BrowserWindow, ipcMain, Tray, Menu, nativeImage, session } = require('electron')
+const { app, BrowserWindow, ipcMain, Tray, Menu } = require('electron')
 const path = require('path')
 
 let tray = null
 let mainWindow = null
 
 function createWindow () {
-  const iconPath = path.join(__dirname, '..', '..', 'assets', 'icons', 'favicons', 'favicon1.png')
-  const icon = nativeImage.createFromPath(iconPath)
-
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -17,15 +14,10 @@ function createWindow () {
       contextIsolation: true,
       nodeIntegration: false
     },
-    icon: icon
+    icon: path.join(__dirname, '..', '..', 'assets', 'icons', 'favicons', 'favicon1.ico')
   })
   
   mainWindow.loadFile(path.join(__dirname, '..', '..', 'index.html'))
-
-  // Send the icon to the renderer process
-  mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.webContents.send('set-titlebar-icon', icon.toDataURL())
-  })
 
   mainWindow.on('close', (event) => {
     if (!app.isQuitting) {
@@ -50,7 +42,6 @@ function createTray() {
   tray.setToolTip('AtomSuite Boilerplate')
   tray.setContextMenu(contextMenu)
 
-  // Add left-click event to show/minimize the app
   tray.on('click', () => {
     if (mainWindow.isVisible()) {
       mainWindow.hide()
@@ -77,10 +68,8 @@ app.on('window-all-closed', () => {
   }
 })
 
-// Add any IPC handlers here
 ipcMain.handle('ping', () => 'pong')
 
-// Add handlers for window controls
 ipcMain.handle('minimize-window', () => {
   if (mainWindow) mainWindow.hide()
 })

@@ -12,10 +12,4 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('close-button').addEventListener('click', () => {
     window.electronAPI.closeWindow()
   })
-
-  // Add click event for titlebar icon if needed
-  document.getElementById('titlebar-icon').addEventListener('click', () => {
-    // Add your logic here
-    console.log('Titlebar icon clicked');
-  });
 })
