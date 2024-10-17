@@ -1,6 +1,6 @@
 {
   "name": "atomsuite-boilerplate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A comprehensive starter template for building cross-platform desktop applications",
   "main": "resources/source/java/main.js",
   "scripts": {

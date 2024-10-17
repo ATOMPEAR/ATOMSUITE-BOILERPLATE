@@ -3,8 +3,5 @@ node_modules/
 backups/
 logging/
 dist/
-.vscode/
 
 # IGNORE DEV FILES
-package-lock.json
-*.cursorrules
