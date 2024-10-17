@@ -5,7 +5,7 @@ let tray = null
 let mainWindow = null
 
 function createWindow () {
-  const iconPath = path.join(__dirname, '..', '..', 'assets', 'icons', 'favicons', 'favicon2.png')
+  const iconPath = path.join(__dirname, '..', '..', 'assets', 'icons', 'favicons', 'favicon1.png')
   const icon = nativeImage.createFromPath(iconPath)
 
   mainWindow = new BrowserWindow({
@@ -37,7 +37,7 @@ function createWindow () {
 }
 
 function createTray() {
-  tray = new Tray(path.join(__dirname, '..', '..', 'assets', 'icons', 'favicons', 'favicon2.ico'))
+  tray = new Tray(path.join(__dirname, '..', '..', 'assets', 'icons', 'favicons', 'favicon1.ico'))
   const contextMenu = Menu.buildFromTemplate([
     { label: 'SHOW', click: () => mainWindow.show() },
     { label: 'MINIMIZE', click: () => mainWindow.hide() },

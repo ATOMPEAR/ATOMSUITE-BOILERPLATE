@@ -5,6 +5,8 @@ $titlebar-background: #222222
 $titlebar-text-color: #FFFFFF
 $control-button-color: #FFFFFF
 $control-button-hover-color: #01A2FF
+$icon-color: #FFFFFF
+$icon-hover-color: #01A2FF
 
 // Other variables
 $font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
@@ -35,6 +37,11 @@ body
   width: 16px
   height: 16px
   margin-left: 10px
+  filter: brightness(0) invert(1)
+  transition: filter 0.3s ease
+
+  &:hover
+    filter: brightness(0) saturate(100%) invert(40%) sepia(95%) saturate(1642%) hue-rotate(176deg) brightness(105%) contrast(101%)
 
 #window-title
   flex-grow: 1

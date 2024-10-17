@@ -35,6 +35,17 @@ body {
   width: 16px;
   height: 16px;
   margin-left: 10px;
+  -webkit-filter: brightness(0) invert(1);
+          filter: brightness(0) invert(1);
+  -webkit-transition: -webkit-filter 0.3s ease;
+  transition: -webkit-filter 0.3s ease;
+  transition: filter 0.3s ease;
+  transition: filter 0.3s ease, -webkit-filter 0.3s ease;
+}
+
+#titlebar-icon:hover {
+  -webkit-filter: brightness(0) saturate(100%) invert(40%) sepia(95%) saturate(1642%) hue-rotate(176deg) brightness(105%) contrast(101%);
+          filter: brightness(0) saturate(100%) invert(40%) sepia(95%) saturate(1642%) hue-rotate(176deg) brightness(105%) contrast(101%);
 }
 
 #window-title {
