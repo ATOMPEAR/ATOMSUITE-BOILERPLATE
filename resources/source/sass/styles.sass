@@ -63,6 +63,7 @@ body
     display: flex
     align-items: center
     padding-left: 10px
+    position: relative
 
   #titlebar-icon
     font-size: 18px
@@ -70,9 +71,35 @@ body
     color: $titlebar-icon-color
     transition: color 0.3s ease
     -webkit-app-region: no-drag
+    cursor: pointer
+    position: relative
 
     &:hover
       color: $titlebar-icon-hover-color
+
+    &::after
+      content: attr(data-tooltip)
+      position: absolute
+      top: 50%
+      left: 100%
+      transform: translateY(-50%)
+      background-color: $titlebar-background
+      color: $titlebar-text-color
+      padding: 4px 8px
+      border-radius: 4px
+      font-size: 11px
+      white-space: nowrap
+      opacity: 0
+      visibility: hidden
+      transition: opacity 0.3s ease, visibility 0.3s ease
+      pointer-events: none
+      z-index: 1000
+      margin-left: 5px
+      font-family: 'Terminus Nerd Font Italic', $font-stack
+
+    &:hover::after
+      opacity: 1
+      visibility: visible
 
   #window-title
     flex-grow: 1
