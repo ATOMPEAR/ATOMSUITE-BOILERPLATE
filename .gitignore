@@ -7,3 +7,4 @@ dist/
 
 # IGNORE DEV FILES
 package-lock.json
+.cursorrules
