@@ -1,9 +1,9 @@
-# IGNORE FOLDERS
+# IGNORE DEV FOLDERS
 node_modules/
 backups/
 logging/
 dist/
 .vscode/
 
-# IGNORE FILES
+# IGNORE DEV FILES
 package-lock.json
