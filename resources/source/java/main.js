@@ -12,7 +12,7 @@ function createWindow () {
     }
   })
 
-  win.loadFile('resources/source/index.html')
+  win.loadFile(path.join(__dirname, '..', '..', 'index.html'))
 }
 
 app.whenReady().then(() => {
@@ -33,4 +33,3 @@ app.on('window-all-closed', () => {
 
 // Add any IPC handlers here
 ipcMain.handle('ping', () => 'pong')
-
