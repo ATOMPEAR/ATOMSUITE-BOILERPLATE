@@ -1,0 +1,48 @@
+// Variables
+$primary-color: #3498db
+$secondary-color: #2c3e50
+$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
+
+// Global styles
+body
+  font-family: $font-stack
+  line-height: 1.6
+  color: $secondary-color
+  margin: 0
+  padding: 0
+
+// Layout
+header, main, footer
+  padding: 1rem
+
+header
+  background-color: $primary-color
+  color: white
+
+  h1
+    margin: 0
+
+main
+  max-width: 800px
+  margin: 0 auto
+
+// Components
+button
+  background-color: $primary-color
+  color: white
+  border: none
+  padding: 0.5rem 1rem
+  cursor: pointer
+  font-size: 1rem
+
+  &:hover
+    background-color: darken($primary-color, 10%)
+
+// Responsive design
+@media (max-width: 600px)
+  body
+    font-size: 14px
+
+  main
+    padding: 0.5rem
+
