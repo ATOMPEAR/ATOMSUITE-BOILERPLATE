@@ -19,6 +19,16 @@ function createWindow () {
   
   mainWindow.loadFile(path.join(__dirname, '..', '..', 'index.html'))
 
+  // Listen for the 'minimize' event
+  mainWindow.on('minimize', (event) => {
+    event.preventDefault()
+    mainWindow.hide()
+    if (tray === null) {
+      createTray()
+    }
+  })
+
+  // Listen for the 'close' event
   mainWindow.on('close', (event) => {
     if (!app.isQuitting) {
       event.preventDefault()
@@ -31,9 +41,11 @@ function createWindow () {
 function createTray() {
   tray = new Tray(path.join(__dirname, '..', '..', 'assets', 'icons', 'favicons', 'favicon1.ico'))
   const contextMenu = Menu.buildFromTemplate([
-    { label: 'SHOW', click: () => mainWindow.show() },
-    { label: 'MINIMIZE', click: () => mainWindow.hide() },
-    { type: 'separator' },
+    { label: 'SHOW', click: () => {
+      mainWindow.show()
+      if (tray) tray.destroy()
+      tray = null
+    }},
     { label: 'QUIT', click: () => {
       app.isQuitting = true
       app.quit()
@@ -43,17 +55,31 @@ function createTray() {
   tray.setContextMenu(contextMenu)
 
   tray.on('click', () => {
-    if (mainWindow.isVisible()) {
-      mainWindow.hide()
-    } else {
-      mainWindow.show()
-    }
+    mainWindow.show()
+    if (tray) tray.destroy()
+    tray = null
   })
+}
+
+function createTitlebarIconContextMenu() {
+  return Menu.buildFromTemplate([
+    { label: 'MAXIMIZE', click: () => {
+      if (mainWindow.isMaximized()) {
+        mainWindow.unmaximize()
+      } else {
+        mainWindow.maximize()
+      }
+    }},
+    { label: 'MINIMIZE', click: () => mainWindow.minimize() },
+    { label: 'QUIT', click: () => {
+      app.isQuitting = true
+      app.quit()
+    }},
+  ])
 }
 
 app.whenReady().then(() => {
   createWindow()
-  createTray()
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -70,8 +96,13 @@ app.on('window-all-closed', () => {
 
 ipcMain.handle('ping', () => 'pong')
 
+ipcMain.handle('show-titlebar-icon-context-menu', (event) => {
+  const menu = createTitlebarIconContextMenu()
+  menu.popup({ window: BrowserWindow.fromWebContents(event.sender) })
+})
+
 ipcMain.handle('minimize-window', () => {
-  if (mainWindow) mainWindow.hide()
+  if (mainWindow) mainWindow.minimize()
 })
 
 ipcMain.handle('maximize-window', () => {

@@ -1,6 +1,6 @@
 // This file is executed in the renderer process
 document.addEventListener('DOMContentLoaded', () => {
-  // Window control buttons
+  // Keep the window control button event listeners
   document.getElementById('minimize-button').addEventListener('click', () => {
     window.electronAPI.minimizeWindow()
   })
@@ -31,4 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Ensure only one content area is active initially
   mainContent1.classList.add('active');
   mainContent2.classList.remove('active');
+
+  // Titlebar icon context menu functionality
+  titlebarIcon.addEventListener('contextmenu', (e) => {
+    e.preventDefault()
+    window.electronAPI.showTitlebarIconContextMenu()
+  })
 })
