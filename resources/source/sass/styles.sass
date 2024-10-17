@@ -3,9 +3,8 @@ $background-color: #FFFFFF
 $text-color: #222222
 $titlebar-background: #222222
 $titlebar-text-color: #FFFFFF
-$minimize-button-color: #ffbd44
-$maximize-button-color: #00ca4e
-$close-button-color: #ff605c
+$control-button-color: #FFFFFF
+$control-button-hover-color: #01A2FF
 
 // Other variables
 $font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
@@ -55,15 +54,11 @@ body
   border: none
   margin-right: 8px
   cursor: pointer
+  background-color: $control-button-color
+  transition: background-color 0.3s ease
 
-#minimize-button
-  background-color: $minimize-button-color
-
-#maximize-button
-  background-color: $maximize-button-color
-
-#close-button
-  background-color: $close-button-color
+  &:hover
+    background-color: $control-button-hover-color
 
 // Content styles
 #content

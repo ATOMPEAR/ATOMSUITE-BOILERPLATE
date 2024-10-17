@@ -61,18 +61,13 @@ body {
   border: none;
   margin-right: 8px;
   cursor: pointer;
+  background-color: #FFFFFF;
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-#minimize-button {
-  background-color: #ffbd44;
-}
-
-#maximize-button {
-  background-color: #00ca4e;
-}
-
-#close-button {
-  background-color: #ff605c;
+.control-button:hover {
+  background-color: #01A2FF;
 }
 
 #content {
