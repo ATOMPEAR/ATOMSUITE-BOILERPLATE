@@ -9,7 +9,8 @@ function createWindow () {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false
-    }
+    },
+    icon: path.join(__dirname, '..', '..', 'assets', 'icons', 'favicons', 'favicon1.ico')
   })
 
   win.loadFile(path.join(__dirname, '..', '..', 'index.html'))
