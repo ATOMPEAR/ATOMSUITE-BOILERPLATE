@@ -1,1 +1,8 @@
+# IGNORE FOLDERS
 node_modules/
+logging/
+dist/
+.vscode/
+
+# IGNORE FILES
+package-lock.json
