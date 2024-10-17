@@ -5,6 +5,8 @@ $titlebar-background: #222222
 $titlebar-text-color: #FFFFFF
 $control-button-color: #FFFFFF
 $control-button-hover-color: #01A2FF
+$titlebar-icon-color: #FFFFFF
+$titlebar-icon-hover-color: #01A2FF
 
 // Other variables
 $font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
@@ -30,17 +32,29 @@ body
   justify-content: space-between
   align-items: center
   -webkit-app-region: drag
-
-#window-title
-  flex-grow: 1
-  text-align: center
-  font-weight: bold
-  text-transform: uppercase
   color: $titlebar-text-color
 
-#window-controls
-  display: flex
-  -webkit-app-region: no-drag
+  #titlebar-left
+    display: flex
+    align-items: center
+    padding-left: 10px
+
+  #titlebar-icon
+    font-size: 18px
+    color: $titlebar-icon-color
+    transition: color 0.3s ease
+    -webkit-app-region: no-drag
+
+    &:hover
+      color: $titlebar-icon-hover-color
+
+  #window-title
+    flex-grow: 1
+    text-align: center
+
+  #window-controls
+    display: flex
+    -webkit-app-region: no-drag
 
 .control-button
   width: 12px
@@ -67,7 +81,7 @@ body
   #content
     padding: 0.5rem
 
-// Add this at the top of your file
+// Font Awesome
 @font-face
   font-family: 'Font Awesome 5 Free'
   font-style: normal
