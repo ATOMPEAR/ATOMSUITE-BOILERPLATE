@@ -5,6 +5,7 @@ function createWindow () {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    frame: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
@@ -34,3 +35,25 @@ app.on('window-all-closed', () => {
 
 // Add any IPC handlers here
 ipcMain.handle('ping', () => 'pong')
+
+// Add handlers for window controls
+ipcMain.handle('minimize-window', () => {
+  const win = BrowserWindow.getFocusedWindow()
+  if (win) win.minimize()
+})
+
+ipcMain.handle('maximize-window', () => {
+  const win = BrowserWindow.getFocusedWindow()
+  if (win) {
+    if (win.isMaximized()) {
+      win.unmaximize()
+    } else {
+      win.maximize()
+    }
+  }
+})
+
+ipcMain.handle('close-window', () => {
+  const win = BrowserWindow.getFocusedWindow()
+  if (win) win.close()
+})

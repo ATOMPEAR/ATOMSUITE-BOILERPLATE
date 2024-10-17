@@ -1,20 +1,74 @@
-// Variables
-$primary-color: #3498db
-$secondary-color: #2c3e50
+// Theme variables
+$background-color: #FFFFFF
+$text-color: #222222
+$titlebar-background: #222222
+$titlebar-text-color: #FFFFFF
+$minimize-button-color: #ffbd44
+$maximize-button-color: #00ca4e
+$close-button-color: #ff605c
+
+// Other variables
 $font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
 
 // Global styles
 body
   font-family: $font-stack
   line-height: 1.6
-  color: $secondary-color
+  color: $text-color
+  background-color: $background-color
   margin: 0
+  padding: 0
+  max-width: 100%
+  height: 100vh
+  display: flex
+  flex-direction: column
+
+// Titlebar styles
+#titlebar
+  height: 30px
+  background-color: $titlebar-background
+  display: flex
+  justify-content: space-between
+  align-items: center
+  -webkit-app-region: drag
+
+#window-title
+  flex-grow: 1
+  text-align: center
+  font-weight: bold
+  text-transform: uppercase
+  color: $titlebar-text-color
+
+#window-controls
+  display: flex
+  -webkit-app-region: no-drag
+
+.control-button
+  width: 12px
+  height: 12px
+  border-radius: 50%
+  border: none
+  margin-right: 8px
+  cursor: pointer
+
+#minimize-button
+  background-color: $minimize-button-color
+
+#maximize-button
+  background-color: $maximize-button-color
+
+#close-button
+  background-color: $close-button-color
+
+// Content styles
+#content
+  flex-grow: 1
   padding: 1rem
-  max-width: 800px
-  margin: 0 auto
 
 // Responsive design
 @media (max-width: 600px)
   body
     font-size: 14px
+
+  #content
     padding: 0.5rem

@@ -1,8 +1,15 @@
 // This file is executed in the renderer process
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('ping').addEventListener('click', async () => {
-    const response = await window.electronAPI.ping()
-    console.log(response) // Should log 'pong'
+  // Window control buttons
+  document.getElementById('minimize-button').addEventListener('click', () => {
+    window.electronAPI.minimizeWindow()
+  })
+
+  document.getElementById('maximize-button').addEventListener('click', () => {
+    window.electronAPI.maximizeWindow()
+  })
+
+  document.getElementById('close-button').addEventListener('click', () => {
+    window.electronAPI.closeWindow()
   })
 })
-
