@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, Tray, Menu, nativeImage } = require('electron')
+const { app, BrowserWindow, ipcMain, Tray, Menu, nativeImage, session } = require('electron')
 const path = require('path')
 
 let tray = null
@@ -19,7 +19,7 @@ function createWindow () {
     },
     icon: icon
   })
-
+  
   mainWindow.loadFile(path.join(__dirname, '..', '..', 'index.html'))
 
   // Send the icon to the renderer process

@@ -5,6 +5,8 @@ $titlebar-background: #222222
 $titlebar-text-color: #FFFFFF
 $control-button-color: #FFFFFF
 $control-button-hover-color: #01A2FF
+$icon-color: #FFFFFF
+$icon-hover-color: #01A2FF
 
 // Other variables
 $font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
@@ -30,6 +32,15 @@ body
   justify-content: space-between
   align-items: center
   -webkit-app-region: drag
+
+#titlebar-icon
+  width: 16px
+  height: 16px
+  margin-left: 10px
+  background-image: url('../../assets/icons/favicons/favicon1.ico')
+  background-size: contain
+  background-repeat: no-repeat
+  cursor: pointer  // Add this line to change the cursor to a pointer on hover
 
 #window-title
   flex-grow: 1
@@ -66,3 +77,11 @@ body
 
   #content
     padding: 0.5rem
+
+// Add this at the top of your file
+@font-face
+  font-family: 'Font Awesome 5 Free'
+  font-style: normal
+  font-weight: 900
+  font-display: block
+  src: url("../../assets/fontawesome/webfonts/fa-solid-900.woff2") format("woff2")
